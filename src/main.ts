@@ -55,6 +55,13 @@ function renderTasks(tasks: Task[]) {
     btnDelete.className = "bg-red-500 px-2 py-1 rounded-md";
     btnDelete.innerText = "Delete";
 
+    btnDelete.addEventListener("click", (e) => {
+      const index = tasks.findIndex((t) => t.id == task.id);
+      tasks.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTasks(tasks);
+    });
+
     header.append(title);
 
     header.append(btnDelete);
