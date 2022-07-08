@@ -1,9 +1,11 @@
+import { v4 } from "uuid";
 import "./style.css";
 
 const taskForm = document.querySelector<HTMLFormElement>("#taskForm");
 const taskList = document.querySelector<HTMLDivElement>("#tasksList");
 
 interface Task {
+  id: string;
   title: string;
   description: string;
 }
@@ -19,6 +21,7 @@ taskForm?.addEventListener("submit", (e) => {
   tasks.push({
     title: title.value,
     description: description.value,
+    id: v4(),
   });
 
   localStorage.setItem("tasks", JSON.stringify(tasks));
