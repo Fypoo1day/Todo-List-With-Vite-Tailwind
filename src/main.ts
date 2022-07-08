@@ -1,4 +1,7 @@
 import { v4 } from "uuid";
+import Toastify from "toastify-js";
+
+import "toastify-js/src/toastify.css";
 import "./style.css";
 
 const taskForm = document.querySelector<HTMLFormElement>("#taskForm");
@@ -25,6 +28,13 @@ taskForm?.addEventListener("submit", (e) => {
   });
 
   localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  Toastify({
+    text: "Task added",
+    style: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+    },
+  }).showToast();
 
   renderTasks(tasks);
 
@@ -59,6 +69,9 @@ function renderTasks(tasks: Task[]) {
       const index = tasks.findIndex((t) => t.id == task.id);
       tasks.splice(index, 1);
       localStorage.setItem("tasks", JSON.stringify(tasks));
+      Toastify({
+        text: "Task deleted",
+      }).showToast();
       renderTasks(tasks);
     });
 
